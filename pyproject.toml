@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "small-sentence-splitter"
+version = "0.0.1"
+authors = [
+  { name="Joseph Catrambone", email="small-sentence-splitter@xoana.io" },
+]
+description = "A small zero-dependency sentence tokenizer."
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/josephcatrambone/small-sentence-splitter"
+Issues = "https://github.com/josephcatrambone/small-sentence-splitter/issues"

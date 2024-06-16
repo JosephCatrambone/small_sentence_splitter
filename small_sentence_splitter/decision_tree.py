@@ -23,21 +23,21 @@ class DecisionTree:
         }
 
     @classmethod
-    def from_saved(cls, data: dict):
+    def from_dict(cls, data: dict):
         dt = cls()
-        dt.label = data["label"]
-        dt.label_confidence = data["confidence"]
+        dt.label = int(data["label"]) if data["label"] is not None else None
+        dt.label_confidence = {int(k): v for k, v in data["confidence"].items()}
         dt.gini_impurity = data["gini"]
         dt.feature_threshold = data["threshold"]
         dt.feature_index = data["feature_idx"]
         if data["left"]:
-            dt.left = cls.from_saved(data["left"])
+            dt.left = cls.from_dict(data["left"])
         if data["right"]:
-            dt.right = cls.from_saved(data["right"])
+            dt.right = cls.from_dict(data["right"])
         return dt
 
     @classmethod
-    def from_data(cls, examples: List[List[float]], labels: List[int], max_depth:int = -1):
+    def new_trained(cls, examples: List[List[float]], labels: List[int], max_depth:int = -1):
         root = cls()
         # Find the base impurity of this state
         cat_to_p = _probability_by_category(labels)
@@ -55,7 +55,7 @@ class DecisionTree:
         best_split_value = 0.5
         lowest_impurity_candidate = 1.0
         for candidate_feature in range(len(examples[0])):
-            for candidate_feature_threshold in (0.0, 0.25, 0.5, 0.75, 1.0):
+            for candidate_feature_threshold in (0.25, 0.5, 0.75):
                 left_candidate_labels = list()
                 right_candidate_labels = list()
                 for idx in range(len(examples)):
@@ -91,8 +91,8 @@ class DecisionTree:
             else:
                 right_examples.append(examples[idx])
                 right_labels.append(labels[idx])
-        root.left = cls.from_data(left_examples, left_labels, max_depth=max_depth-1)
-        root.right = cls.from_data(right_examples, right_labels, max_depth=max_depth-1)
+        root.left = cls.new_trained(left_examples, left_labels, max_depth=max_depth-1)
+        root.right = cls.new_trained(right_examples, right_labels, max_depth=max_depth-1)
         return root
 
     def infer(self, example: List[float]) -> Dict[int, float]:

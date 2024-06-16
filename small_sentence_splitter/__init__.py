@@ -1,4 +1,6 @@
 from small_sentence_splitter.sentence_tokenizer import BaseSentenceTokenizer
+from small_sentence_splitter.dt_tokenizer import DecisionTreeSentenceTokenizer
+from small_sentence_splitter.rf_tokenizer import RandomForestSentenceTokenizer
 
-__all__ = ["BaseSentenceTokenizer",]
+__all__ = ["BaseSentenceTokenizer", "DecisionTreeSentenceTokenizer", "RandomForestSentenceTokenizer"]
 

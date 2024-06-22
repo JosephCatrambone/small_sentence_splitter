@@ -1,0 +1,16 @@
+Lifted from https://damdid2022.frccsc.ru/files/article/DAMDID_2022_paper_2646.pdf
+Zavyalova, Martynyuk, and Samarev
+
+"Testing will be performed on 5840 sentences from “The GUM Corpus” [16]."
+
+|Tool Name|tp|fp|tn|fn|accuracy|error|precision|recall|f1|
+|---|---|---|---|---|---|---|---|---|---|
+|Sentencize.jl|6330|254|107813|1078|0.99|0.01|0.96|0.85|0.905|
+|NLTK|6269|283|107787|1139|0.99|0.01|0.96|0.85|0.898|
+|OpenNLP|6255|276|107791|1153|0.99|0.01|0.96|0.84|0.897|
+|CoreNLP|6278|362|107786|1130|0.99|0.01|0.95|0.85|0.894|
+|WordTokenizers.jl|6140|264|107809|1268|0.99|0.01|0.96|0.83|0.889|
+|Spacy (Dependency parser)|6631|934|107268|777|0.99|0.01|0.88|0.90|0.886|
+|Spacy (Rule-based)|6183|994|107531|1225|0.98|0.02|0.86|0.83|0.848|
+|SimpleSplitter|5760|772|107847|1648|0.98|0.02|0.88|0.78|0.826|
+|Julia|split()|5760|878|107780|1648|0.98|0.02|0.87|0.78|0.820|
